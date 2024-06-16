@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react'
 import { api } from '../services/api'
 
+import PropTypes from 'prop-types'
 
 export const AuthContext = createContext({})
 
@@ -31,9 +32,14 @@ function AuthProvider({children}) {
   )
 }
 
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
 function useAuth() {
   const context = useContext(AuthContext)
   return context
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { AuthProvider, useAuth }
