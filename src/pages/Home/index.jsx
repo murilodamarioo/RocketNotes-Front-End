@@ -9,6 +9,7 @@ import { ButtonText } from '../../components/ButtonText'
 
 import { api } from '../../services/api'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export function Home() {
   const [search, setSearch] = useState('')
@@ -16,7 +17,7 @@ export function Home() {
   const [tagsSelected, setTagsSelected] = useState([])
   const [notes, setNotes] = useState([])
 
-  console.log(notes)
+  const navigate = useNavigate()
 
   function handleTagSelected(tagName) {
     if (tagName === 'all') {
@@ -30,6 +31,10 @@ export function Home() {
     } else {
       setTagsSelected(prevState => [...prevState, tagName])
     }
+  }
+
+  function handleDetails(id) {
+    navigate(`/details/${id}`)
   }
 
   useEffect(() => {
@@ -94,6 +99,7 @@ export function Home() {
               <Note 
                 key={String(note.id)}
                 data={note}
+                onClick={() => handleDetails(note.id)}
               />
             ))
           }
